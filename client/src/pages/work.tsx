@@ -1,151 +1,265 @@
-import { CaseStudyCard } from "@/components/case-study-card";
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { StatisticsCounter } from "@/components/statistics-counter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
-import { useState } from "react";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
+// --- Data for Work Items ---
+interface WorkItem {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  technologies: string[];
+}
+
+const workItems: WorkItem[] = [
+  {
+    id: "1",
+    title: "E-Commerce Platform",
+    description:
+      "A modern e-commerce solution with advanced features, payment integration, and admin dashboard.",
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "E-commerce",
+    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+  },
+  {
+    id: "2",
+    title: "Luxury Fashion Store",
+    description:
+      "A high-end online store for a luxury fashion brand, focusing on visual storytelling and user experience.",
+    image:
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "E-commerce",
+    technologies: ["Next.js", "Shopify API", "Tailwind CSS", "Vercel"],
+  },
+  {
+    id: "3",
+    title: "Electronics Marketplace",
+    description:
+      "Comprehensive electronics marketplace with advanced search, reviews, and multi-vendor support.",
+    image:
+      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "E-commerce",
+    technologies: ["Vue.js", "Laravel", "MySQL", "Redis"],
+  },
+  {
+    id: "4",
+    title: "Analytics SaaS Platform",
+    description:
+      "Comprehensive analytics dashboard with real-time data visualization and reporting features.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "SaaS",
+    technologies: ["React", "D3.js", "PostgreSQL", "Redis"],
+  },
+  {
+    id: "5",
+    title: "Project Management SaaS",
+    description:
+      "Team collaboration platform with task management, time tracking, and project analytics.",
+    image:
+      "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "SaaS",
+    technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
+  },
+  {
+    id: "6",
+    title: "CRM SaaS Solution",
+    description:
+      "Customer relationship management platform with sales pipeline, contact management, and reporting.",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "SaaS",
+    technologies: ["Vue.js", "Node.js", "MongoDB", "Socket.io"],
+  },
+  {
+    id: "7",
+    title: "Mobile Banking App",
+    description:
+      "Secure mobile banking application with biometric authentication and real-time transactions.",
+    image:
+      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Mobile Apps",
+    technologies: [
+      "React Native",
+      "Firebase",
+      "Biometric Auth",
+      "API Integration",
+    ],
+  },
+  {
+    id: "8",
+    title: "Fitness Tracking App",
+    description:
+      "Cross-platform fitness app with workout tracking, social features, and health analytics.",
+    image:
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Mobile Apps",
+    technologies: ["Flutter", "Firebase", "HealthKit", "Google Fit"],
+  },
+  {
+    id: "10",
+    title: "AI Customer Support",
+    description:
+      "Intelligent chatbot system that handles customer inquiries with natural language processing.",
+    image:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "AI Solutions",
+    technologies: ["OpenAI API", "Python", "FastAPI", "Machine Learning"],
+  },
+  {
+    id: "11",
+    title: "AI Content Generator",
+    description:
+      "Intelligent content creation platform powered by GPT-4 with custom training for brand voice.",
+    image:
+      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "AI Solutions",
+    technologies: ["Python", "OpenAI API", "React", "PostgreSQL"],
+  },
+  {
+    id: "12",
+    title: "AI Document Processor",
+    description:
+      "Automated document analysis and data extraction system using computer vision and NLP.",
+    image:
+      "https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "AI Solutions",
+    technologies: ["Python", "TensorFlow", "OpenCV", "FastAPI"],
+  },
+  {
+    id: "13",
+    title: "Workflow Automation",
+    description:
+      "Custom automation solution that streamlines business processes and reduces manual work.",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Automation",
+    technologies: ["Zapier", "Webhooks", "API Integration", "Custom Scripts"],
+  },
+  {
+    id: "14",
+    title: "Email Marketing Automation",
+    description:
+      "Automated email marketing platform with segmentation, A/B testing, and analytics.",
+    image:
+      "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Automation",
+    technologies: ["Node.js", "SendGrid", "MongoDB", "Redis"],
+  },
+  {
+    id: "15",
+    title: "Inventory Management Automation",
+    description:
+      "Automated inventory tracking system with real-time updates and predictive analytics.",
+    image:
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Automation",
+    technologies: ["Python", "Django", "PostgreSQL", "Celery"],
+  },
+];
+
+// --- Reusable WorkShowcase Component ---
+function WorkShowcase({ items }: { items: WorkItem[] }) {
+  return (
+    <section className="py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* The 'layout' prop has been removed from this container */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {items.map((item) => (
+            // The `layout` prop has been removed here to disable the animation
+            <motion.div
+              key={item.id}
+              className="glass-card rounded-xl overflow-hidden hover-lift smooth-transition"
+              whileHover={{
+                scale: 1.03,
+                transition: { duration: 0.3 },
+              }}
+            >
+              <div className="relative overflow-hidden h-48">
+                <motion.img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute top-4 left-4">
+                  <Badge variant="default">{item.category}</Badge>
+                </div>
+              </div>
+
+              <div className="p-6">
+                <h3 className="font-heading font-semibold text-xl mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-muted-foreground mb-4 h-20">
+                  {item.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {item.technologies.map((tech) => (
+                    <Badge key={tech} variant="secondary">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- Main Page Component ---
 export default function Work() {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const categories = [
     { id: "all", label: "All Projects" },
-    { id: "e-commerce", label: "E-commerce" },
-    { id: "saas", label: "SaaS" },
-    { id: "mobile", label: "Mobile Apps" },
-    { id: "ai", label: "AI Solutions" },
-    { id: "automation", label: "Automation" }
+    { id: "E-commerce", label: "E-commerce" },
+    { id: "SaaS", label: "SaaS" },
+    { id: "Mobile Apps", label: "Mobile Apps" },
+    { id: "AI Solutions", label: "AI Solutions" },
+    { id: "Automation", label: "Automation" },
   ];
 
-  const projects = [
-    {
-      id: 1,
-      title: "Fashion Retailer Platform",
-      description: "Complete e-commerce solution with inventory management, customer analytics, and multi-payment gateway integration.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2426&q=80",
-      tags: ["E-commerce", "Next.js", "Stripe", "Analytics"],
-      category: "e-commerce",
-      metric1: "+250% Sales",
-      metric2: "12 weeks",
-      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Stripe", "Vercel"],
-      results: [
-        "250% increase in online sales",
-        "40% reduction in cart abandonment", 
-        "99.9% uptime since launch",
-        "Mobile conversion rate improved by 180%"
-      ]
-    },
-    {
-      id: 2,
-      title: "Analytics SaaS Platform",
-      description: "Real-time data visualization and business intelligence dashboard with custom reporting and team collaboration features.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      tags: ["SaaS", "React", "D3.js", "PostgreSQL"],
-      category: "saas", 
-      metric1: "10k+ Users",
-      metric2: "16 weeks",
-      technologies: ["React", "Node.js", "PostgreSQL", "D3.js", "AWS", "Docker"],
-      results: [
-        "10,000+ active monthly users",
-        "99.95% uptime reliability",
-        "Processing 1M+ data points daily",
-        "Average load time under 2 seconds"
-      ]
-    },
-    {
-      id: 3,
-      title: "Fitness Tracking App",
-      description: "Cross-platform mobile app with AI-powered workout recommendations, progress tracking, and social features.",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      tags: ["Mobile", "React Native", "AI", "Health"],
-      category: "mobile",
-      metric1: "4.8★ Rating",
-      metric2: "8 weeks", 
-      technologies: ["React Native", "Expo", "TensorFlow.js", "Firebase", "Stripe"],
-      results: [
-        "4.8/5 star rating on app stores",
-        "50,000+ downloads in first month",
-        "85% user retention after 30 days",
-        "Featured in App Store health category"
-      ]
-    },
-    {
-      id: 4,
-      title: "AI Content Generator",
-      description: "Intelligent content creation platform powered by GPT-4, with custom training for brand voice and automated workflows.",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      tags: ["AI", "GPT-4", "SaaS", "Automation"],
-      category: "ai",
-      metric1: "95% Time Saved",
-      metric2: "10 weeks",
-      technologies: ["Python", "OpenAI API", "FastAPI", "React", "PostgreSQL", "Celery"],
-      results: [
-        "95% reduction in content creation time",
-        "1000+ pieces of content generated daily",
-        "99.2% customer satisfaction score",
-        "$2M+ saved in copywriting costs"
-      ]
-    },
-    {
-      id: 5,
-      title: "Supply Chain Automation",
-      description: "End-to-end supply chain management system with automated ordering, inventory tracking, and supplier integration.",
-      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      tags: ["Automation", "ERP", "Integration", "Dashboard"],
-      category: "automation",
-      metric1: "60% Cost Reduction",
-      metric2: "14 weeks",
-      technologies: ["Node.js", "Express", "MongoDB", "React", "Docker", "Kubernetes"],
-      results: [
-        "60% reduction in operational costs",
-        "Zero stockouts in 6 months", 
-        "Automated 90% of manual processes",
-        "Real-time visibility across 50+ suppliers"
-      ]
-    },
-    {
-      id: 6,
-      title: "Real Estate Marketplace",
-      description: "Comprehensive property marketplace with virtual tours, mortgage calculator, and agent management system.",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      tags: ["Marketplace", "Real Estate", "Next.js", "Maps"],
-      category: "e-commerce",
-      metric1: "$50M+ Listings",
-      metric2: "18 weeks",
-      technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Google Maps", "Vercel"],
-      results: [
-        "$50M+ in property listings",
-        "2000+ active real estate agents",
-        "300% increase in lead generation", 
-        "Average time on site: 8+ minutes"
-      ]
-    }
-  ];
-
-  const filteredProjects = selectedCategory === "all" 
-    ? projects 
-    : projects.filter(project => project.category === selectedCategory);
+  const filteredWorkItems =
+    selectedCategory === "all"
+      ? workItems
+      : workItems.filter((item) => item.category === selectedCategory);
 
   return (
     <div className="pt-16">
       {/* Hero Section */}
       <section className="py-20 hero-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl mb-6">
+          <h1 className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl mb-6 animate-fade-in">
             Our <span className="text-primary">Work</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Explore our portfolio of successful projects that have helped businesses 
-            scale, innovate, and achieve their digital transformation goals.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 animate-fade-in-delay-1">
+            Explore our portfolio of successful projects that have helped
+            businesses scale, innovate, and achieve their digital transformation
+            goals.
           </p>
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="flex flex-wrap justify-center gap-2 animate-fade-in-delay-2">
             {categories.map((category) => (
               <Button
                 key={category.id}
-                variant={selectedCategory === category.id ? "default" : "outline"}
+                variant={
+                  selectedCategory === category.id ? "default" : "outline"
+                }
                 onClick={() => setSelectedCategory(category.id)}
-                data-testid={`filter-${category.id}`}
+                className="hover-lift smooth-transition"
               >
                 {category.label}
               </Button>
@@ -154,141 +268,34 @@ export default function Work() {
         </div>
       </section>
 
-      {/* Projects Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <CaseStudyCard 
-                key={project.id}
-                title={project.title}
-                description={project.description}
-                image={project.image}
-                tags={project.tags}
-                metric1={project.metric1}
-                metric2={project.metric2}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Dynamic Work Showcase */}
+      <WorkShowcase items={filteredWorkItems} />
 
-      {/* Detailed Project Showcase */}
-      <section className="py-20 bg-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-heading font-bold text-3xl md:text-4xl mb-4">Project Spotlight</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Deep dive into one of our most successful projects and see the impact we delivered.
-            </p>
-          </div>
-
-          <Card className="glass-card overflow-hidden">
-            <div className="grid lg:grid-cols-2">
-              <div className="p-8 lg:p-12">
-                <div className="flex gap-2 mb-4">
-                  {projects[0].tags.map((tag, idx) => (
-                    <Badge key={idx} variant="secondary" className="bg-primary/10 text-primary">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                <h3 className="font-heading font-bold text-3xl mb-4">{projects[0].title}</h3>
-                <p className="text-muted-foreground text-lg mb-6">{projects[0].description}</p>
-                
-                <div className="mb-8">
-                  <h4 className="font-semibold mb-4">Key Results:</h4>
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    {projects[0].results.map((result, idx) => (
-                      <div key={idx} className="flex items-start">
-                        <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                        <span className="text-sm">{result}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mb-8">
-                  <h4 className="font-semibold mb-4">Technologies Used:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {projects[0].technologies.map((tech, idx) => (
-                      <Badge key={idx} variant="outline">{tech}</Badge>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <Button data-testid="project-details">
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    View Live Site
-                  </Button>
-                  <Button variant="outline" data-testid="project-code">
-                    <Github className="mr-2 h-4 w-4" />
-                    View Code
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="relative lg:min-h-[500px]">
-                <img 
-                  src={projects[0].image}
-                  alt={projects[0].title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-heading font-bold text-3xl md:text-4xl mb-4">Our Impact</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Numbers that showcase the success of our partnership with clients.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { number: "50+", label: "Projects Completed" },
-              { number: "98%", label: "Client Satisfaction" },
-              { number: "$10M+", label: "Revenue Generated" },
-              { number: "24/7", label: "Support Available" }
-            ].map((stat, index) => (
-              <Card key={index} className="text-center" data-testid={`stat-${index}`}>
-                <CardContent className="p-6">
-                  <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>
-                  <div className="text-muted-foreground">{stat.label}</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StatisticsCounter />
 
       {/* CTA Section */}
       <section className="py-20 bg-muted">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading font-bold text-3xl md:text-4xl mb-4">
+          <h2 className="font-heading font-bold text-3xl md:text-4xl mb-6 animate-fade-in">
             Ready to Be Our Next Success Story?
           </h2>
-          <p className="text-xl text-muted-foreground mb-8">
-            Let's create something amazing together. Start your project today and join our portfolio of successful launches.
+          <p className="text-xl text-muted-foreground mb-8 animate-fade-in-delay-1">
+            Let's create something amazing together. Start your project today
+            and join our portfolio of successful launches.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay-2">
             <Link href="/contact">
-              <Button size="lg" data-testid="work-cta-contact">
+              <Button size="lg" className="hover-lift smooth-transition">
                 Start Your Project
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link href="/fees">
-              <Button variant="outline" size="lg" data-testid="work-cta-pricing">
+              <Button
+                variant="outline"
+                size="lg"
+                className="hover-lift smooth-transition"
+              >
                 Get Pricing
               </Button>
             </Link>

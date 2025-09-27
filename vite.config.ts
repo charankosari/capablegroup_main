@@ -9,14 +9,6 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "client", "src"),
     },
   },
-  css: {
-    postcss: {
-      plugins: [
-        require('tailwindcss'),
-        require('autoprefixer'),
-      ],
-    },
-  },
   build: {
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
