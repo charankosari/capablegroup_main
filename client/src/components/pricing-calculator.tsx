@@ -7,8 +7,6 @@ import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { usePricingCalculator } from "@/hooks/use-pricing-calculator";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
 type ServiceType = "website" | "mobile" | "ai" | "automation";
@@ -28,26 +26,30 @@ export function PricingCalculator() {
   } = usePricingCalculator();
 
   const [showQuoteModal, setShowQuoteModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const saveQuoteMutation = useMutation({
-    mutationFn: async (quoteData: any) => {
-      return await apiRequest('POST', '/api/quotes', quoteData);
-    },
-    onSuccess: () => {
+  const handleSaveQuote = async () => {
+    setIsSubmitting(true);
+    
+    try {
+      // Simulate quote saving for static site
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       toast({
         title: "Quote Saved!",
         description: "We'll be in touch with a detailed proposal soon.",
       });
       setShowQuoteModal(false);
-    },
-    onError: () => {
+    } catch (error) {
       toast({
         title: "Error",
         description: "Failed to save quote. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
-  });
+  };
 
   const handleRequestQuote = () => {
     const quoteData = {
@@ -59,7 +61,7 @@ export function PricingCalculator() {
       totalPrice: pricing.totalPrice.toString(),
     };
 
-    saveQuoteMutation.mutate(quoteData);
+    handleSaveQuote();
   };
 
   const complexityLabels = ['Simple', 'Basic', 'Medium', 'Advanced', 'Complex'];
@@ -192,10 +194,10 @@ export function PricingCalculator() {
               <Button 
                 className="w-full mt-6" 
                 onClick={handleRequestQuote}
-                disabled={saveQuoteMutation.isPending}
+                disabled={isSubmitting}
                 data-testid="request-quote-button"
               >
-                {saveQuoteMutation.isPending ? 'Saving...' : 'Request Detailed Quote'}
+                {isSubmitting ? 'Saving...' : 'Request Detailed Quote'}
               </Button>
             </CardContent>
           </Card>

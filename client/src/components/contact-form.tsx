@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,17 +9,28 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { insertContactSchema, type InsertContact } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { CloudUpload } from "lucide-react";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  company: z.string().optional(),
+  budget: z.string().optional(),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+  services: z.array(z.string()).optional(),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 export function ContactForm() {
   const { toast } = useToast();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<InsertContact>({
-    resolver: zodResolver(insertContactSchema),
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -31,29 +41,34 @@ export function ContactForm() {
     },
   });
 
-  const contactMutation = useMutation({
-    mutationFn: async (data: InsertContact) => {
-      return await apiRequest('POST', '/api/contact', data);
-    },
-    onSuccess: () => {
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    
+    // Simulate form submission for static site
+    try {
+      // In a real static site, you might want to:
+      // 1. Send to a third-party service like Formspree, Netlify Forms, etc.
+      // 2. Use a serverless function
+      // 3. Send via email service
+      
+      // For now, we'll just show a success message
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      
       toast({
         title: "Message Sent!",
         description: "Thank you for your message. We'll get back to you soon!",
       });
       form.reset();
       setSelectedFile(null);
-    },
-    onError: (error: any) => {
+    } catch (error) {
       toast({
         title: "Error",
-        description: error.message || "Failed to send message. Please try again.",
+        description: "Failed to send message. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
-  });
-
-  const onSubmit = (data: InsertContact) => {
-    contactMutation.mutate(data);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -260,10 +275,10 @@ export function ContactForm() {
               <Button 
                 type="submit" 
                 className="flex-1"
-                disabled={contactMutation.isPending}
+                disabled={isSubmitting}
                 data-testid="submit-contact-form"
               >
-                {contactMutation.isPending ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
               <Button 
                 type="button" 

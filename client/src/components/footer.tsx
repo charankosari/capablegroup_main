@@ -3,38 +3,36 @@ import { Code, Twitter, Linkedin, Github, Dribbble } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
 export function Footer() {
   const { toast } = useToast();
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const newsletterMutation = useMutation({
-    mutationFn: async (email: string) => {
-      return await apiRequest('POST', '/api/newsletter', { email });
-    },
-    onSuccess: () => {
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Simulate newsletter subscription for static site
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       toast({
         title: "Subscribed!",
         description: "Thank you for subscribing to our newsletter.",
       });
       setEmail("");
-    },
-    onError: () => {
+    } catch (error) {
       toast({
         title: "Error",
         description: "Failed to subscribe. Please try again.",
         variant: "destructive",
       });
-    }
-  });
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      newsletterMutation.mutate(email);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -63,10 +61,10 @@ export function Footer() {
             />
             <Button 
               type="submit"
-              disabled={newsletterMutation.isPending}
+              disabled={isSubmitting}
               data-testid="newsletter-submit"
             >
-              {newsletterMutation.isPending ? 'Subscribing...' : 'Subscribe'}
+              {isSubmitting ? 'Subscribing...' : 'Subscribe'}
             </Button>
           </form>
           
