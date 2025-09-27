@@ -11,6 +11,8 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
+type ServiceType = "website" | "mobile" | "ai" | "automation";
+
 export function PricingCalculator() {
   const { toast } = useToast();
   const {
@@ -75,7 +77,7 @@ export function PricingCalculator() {
               <Label htmlFor="service-type" className="text-sm font-medium mb-2 block">
                 Service Type
               </Label>
-              <Select value={serviceType} onValueChange={setServiceType}>
+              <Select value={serviceType} onValueChange={(value: string) => setServiceType(value as ServiceType)}>
                 <SelectTrigger data-testid="select-service-type">
                   <SelectValue placeholder="Select service type" />
                 </SelectTrigger>

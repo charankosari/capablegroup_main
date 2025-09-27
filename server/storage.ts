@@ -51,7 +51,10 @@ export class MemStorage implements IStorage {
     const contact: Contact = { 
       ...insertContact, 
       id, 
-      createdAt: new Date() 
+      createdAt: new Date(),
+      company: insertContact.company ?? null,
+      budget: insertContact.budget ?? null,
+      services: insertContact.services ?? null
     };
     this.contacts.set(id, contact);
     return contact;
@@ -66,7 +69,10 @@ export class MemStorage implements IStorage {
     const quote: Quote = { 
       ...insertQuote, 
       id, 
-      createdAt: new Date() 
+      createdAt: new Date(),
+      addons: insertQuote.addons ?? null,
+      contactEmail: insertQuote.contactEmail ?? null,
+      contactName: insertQuote.contactName ?? null
     };
     this.quotes.set(id, quote);
     return quote;

@@ -69,11 +69,13 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/10 backdrop-blur-sm border border-primary/20;
+    @apply bg-white/10 backdrop-blur-sm border border-primary;
+    border-color: hsl(328 100% 64% / 0.2);
   }
   
   .dark .glass-card {
-    @apply bg-slate-900/30 backdrop-blur-sm border border-primary/30;
+    @apply bg-slate-900/30 backdrop-blur-sm border border-primary;
+    border-color: hsl(328 100% 70% / 0.3);
   }
   
   .hero-gradient {

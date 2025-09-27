@@ -123,11 +123,11 @@ export default function Terms() {
                 <CardContent className="space-y-6">
                   {section.content.map((item, idx) => (
                     <div key={idx}>
-                      {item.subtitle && (
+                      {'subtitle' in item && item.subtitle && (
                         <h4 className="font-semibold text-lg mb-3">{item.subtitle}</h4>
                       )}
                       <p className="text-muted-foreground leading-relaxed">{item.text}</p>
-                      {idx < section.content.length - 1 && item.subtitle && <Separator className="mt-6" />}
+                      {idx < section.content.length - 1 && 'subtitle' in item && item.subtitle && <Separator className="mt-6" />}
                     </div>
                   ))}
                 </CardContent>

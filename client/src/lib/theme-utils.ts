@@ -85,9 +85,7 @@ export function initializeTheme(): void {
   mediaQuery.addEventListener("change", handleChange);
   
   // Return cleanup function
-  return () => {
-    mediaQuery.removeEventListener("change", handleChange);
-  };
+  mediaQuery.removeEventListener("change", handleChange);
 }
 
 /**
