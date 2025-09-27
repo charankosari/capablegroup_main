@@ -1,5 +1,19 @@
-import { type User, type InsertUser, type Contact, type InsertContact, type Quote, type InsertQuote, type NewsletterSubscriber, type InsertNewsletterSubscriber } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { 
+  type User, 
+  type InsertUser, 
+  type Contact, 
+  type InsertContact, 
+  type Quote, 
+  type InsertQuote, 
+  type NewsletterSubscriber, 
+  type InsertNewsletterSubscriber,
+  users,
+  contacts,
+  quotes,
+  newsletterSubscribers 
+} from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -16,87 +30,60 @@ export interface IStorage {
   getNewsletterSubscribers(): Promise<NewsletterSubscriber[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private contacts: Map<string, Contact>;
-  private quotes: Map<string, Quote>;
-  private newsletterSubscribers: Map<string, NewsletterSubscriber>;
-
-  constructor() {
-    this.users = new Map();
-    this.contacts = new Map();
-    this.quotes = new Map();
-    this.newsletterSubscribers = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   async createContact(insertContact: InsertContact): Promise<Contact> {
-    const id = randomUUID();
-    const contact: Contact = { 
-      ...insertContact, 
-      id, 
-      createdAt: new Date(),
-      company: insertContact.company ?? null,
-      budget: insertContact.budget ?? null,
-      services: insertContact.services ?? null
-    };
-    this.contacts.set(id, contact);
+    const [contact] = await db
+      .insert(contacts)
+      .values(insertContact)
+      .returning();
     return contact;
   }
 
   async getContacts(): Promise<Contact[]> {
-    return Array.from(this.contacts.values());
+    return await db.select().from(contacts).orderBy(contacts.createdAt);
   }
 
   async createQuote(insertQuote: InsertQuote): Promise<Quote> {
-    const id = randomUUID();
-    const quote: Quote = { 
-      ...insertQuote, 
-      id, 
-      createdAt: new Date(),
-      addons: insertQuote.addons ?? null,
-      contactEmail: insertQuote.contactEmail ?? null,
-      contactName: insertQuote.contactName ?? null
-    };
-    this.quotes.set(id, quote);
+    const [quote] = await db
+      .insert(quotes)
+      .values(insertQuote)
+      .returning();
     return quote;
   }
 
   async getQuotes(): Promise<Quote[]> {
-    return Array.from(this.quotes.values());
+    return await db.select().from(quotes).orderBy(quotes.createdAt);
   }
 
   async createNewsletterSubscriber(insertSubscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
-    const id = randomUUID();
-    const subscriber: NewsletterSubscriber = { 
-      ...insertSubscriber, 
-      id, 
-      subscribed: true,
-      createdAt: new Date() 
-    };
-    this.newsletterSubscribers.set(id, subscriber);
+    const [subscriber] = await db
+      .insert(newsletterSubscribers)
+      .values(insertSubscriber)
+      .returning();
     return subscriber;
   }
 
   async getNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
-    return Array.from(this.newsletterSubscribers.values());
+    return await db.select().from(newsletterSubscribers).orderBy(newsletterSubscribers.createdAt);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

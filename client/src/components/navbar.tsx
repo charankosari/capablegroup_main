@@ -38,14 +38,14 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href}>
-                <a 
-                  className={`text-muted-foreground hover:text-foreground transition-colors ${
+                <span 
+                  className={`text-muted-foreground hover:text-foreground transition-colors cursor-pointer ${
                     location === item.href ? 'text-foreground font-medium' : ''
                   }`}
                   data-testid={`nav-link-${item.name.toLowerCase()}`}
                 >
                   {item.name}
-                </a>
+                </span>
               </Link>
             ))}
             
@@ -77,13 +77,13 @@ export function Navbar() {
               <div className="flex flex-col space-y-4 mt-8">
                 {navigation.map((item) => (
                   <Link key={item.name} href={item.href}>
-                    <a 
-                      className="text-muted-foreground hover:text-foreground transition-colors block py-2"
+                    <span 
+                      className="text-muted-foreground hover:text-foreground transition-colors block py-2 cursor-pointer"
                       onClick={() => setIsOpen(false)}
                       data-testid={`mobile-nav-link-${item.name.toLowerCase()}`}
                     >
                       {item.name}
-                    </a>
+                    </span>
                   </Link>
                 ))}
                 <div className="pt-4 border-t border-border">

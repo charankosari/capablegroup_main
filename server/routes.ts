@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema, insertQuoteSchema, insertNewsletterSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
+import { sendEmail, generateContactEmailHtml, generateQuoteEmailHtml } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -12,7 +13,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertContactSchema.parse(req.body);
       const contact = await storage.createContact(validatedData);
       
-      // TODO: Send email notification to team
+      // Send email notification to team
+      await sendEmail({
+        to: "hello@capablelabs.dev",
+        from: "noreply@capablelabs.dev",
+        subject: `New Contact Form Submission from ${contact.name}`,
+        text: `New contact form submission from ${contact.name} (${contact.email})`,
+        html: generateContactEmailHtml(contact)
+      });
+      
       console.log("New contact form submission:", contact);
       
       res.json({ success: true, message: "Message sent successfully!" });
@@ -39,7 +48,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertQuoteSchema.parse(req.body);
       const quote = await storage.createQuote(validatedData);
       
-      // TODO: Send email notification to team and client
+      // Send email notification to team
+      await sendEmail({
+        to: "quotes@capablelabs.dev",
+        from: "noreply@capablelabs.dev",
+        subject: `New Quote Request - ${quote.serviceType}`,
+        text: `New quote request for ${quote.serviceType} service`,
+        html: generateQuoteEmailHtml(quote)
+      });
+      
       console.log("New quote request:", quote);
       
       res.json({ 
@@ -70,7 +87,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertNewsletterSchema.parse(req.body);
       const subscriber = await storage.createNewsletterSubscriber(validatedData);
       
-      // TODO: Send welcome email and add to mailing list
+      // Send welcome email
+      await sendEmail({
+        to: subscriber.email,
+        from: "newsletter@capablelabs.dev",
+        subject: "Welcome to Capable Labs Newsletter!",
+        text: "Thank you for subscribing to our newsletter. You'll receive the latest insights on development, design, and technology.",
+        html: `
+          <h2>Welcome to Capable Labs!</h2>
+          <p>Thank you for subscribing to our newsletter.</p>
+          <p>You'll receive the latest insights on development, design, and technology trends directly in your inbox.</p>
+          <p>We respect your privacy and you can unsubscribe at any time.</p>
+          <p>Best regards,<br>The Capable Labs Team</p>
+        `
+      });
+      
       console.log("New newsletter subscriber:", subscriber);
       
       res.json({ 
