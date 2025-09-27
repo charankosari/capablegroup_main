@@ -67,24 +67,57 @@ export default {
           },
         },
         fadeIn: {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
+          from: { 
+            opacity: "0",
+            transform: "translateY(10px)"
+          },
+          to: { 
+            opacity: "1",
+            transform: "translateY(0)"
+          },
         },
         slideUp: {
-          from: { transform: "translateY(20px)", opacity: "0" },
-          to: { transform: "translateY(0)", opacity: "1" },
+          from: { 
+            transform: "translateY(30px)", 
+            opacity: "0" 
+          },
+          to: { 
+            transform: "translateY(0)", 
+            opacity: "1" 
+          },
         },
         bounceGentle: {
           "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        scaleIn: {
+          from: { 
+            transform: "scale(0.95)", 
+            opacity: "0" 
+          },
+          to: { 
+            transform: "scale(1)", 
+            opacity: "1" 
+          },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
+        },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fadeIn 0.5s ease-in-out",
-        "slide-up": "slideUp 0.6s ease-out",
-        "bounce-gentle": "bounceGentle 2s ease-in-out infinite",
+        "fade-in": "fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+        "slide-up": "slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+        "bounce-gentle": "bounceGentle 3s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+        "scale-in": "scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+        "float": "float 6s ease-in-out infinite",
+        "shimmer": "shimmer 2s linear infinite",
       },
     },
   },

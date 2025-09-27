@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "./theme-provider";
 import { Code, Menu, Moon, Sun } from "lucide-react";
-
+import Logo from "../assets/logo.png";
 export function Navbar() {
   const [location] = useLocation();
   const { theme, setTheme } = useTheme();
@@ -23,28 +23,30 @@ export function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 glass-card border-b border-border">
+    <nav className="fixed top-0 w-full z-50 glass-card border-b border-border backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" data-testid="logo-link">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Code className="text-primary-foreground h-4 w-4" />
-              </div>
-              <span className="font-heading font-bold text-xl">Capable Labs</span>
+            <div className="flex items-center space-x-2 hover-lift smooth-transition">
+              
+              <img src={Logo} alt="Capable Labs" className=" h-10" />
             </div>
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
+            {navigation.map((item, index) => (
               <Link key={item.name} href={item.href}>
                 <span 
-                  className={`text-muted-foreground hover:text-foreground transition-colors cursor-pointer ${
+                  className={`text-muted-foreground hover:text-foreground smooth-transition cursor-pointer relative group ${
                     location === item.href ? 'text-foreground font-medium' : ''
                   }`}
                   data-testid={`nav-link-${item.name.toLowerCase()}`}
+                  style={{
+                    animationDelay: `${index * 0.1}s`
+                  }}
                 >
                   {item.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary smooth-transition group-hover:w-full"></span>
                 </span>
               </Link>
             ))}
@@ -54,6 +56,7 @@ export function Navbar() {
               size="icon"
               onClick={toggleTheme}
               data-testid="theme-toggle"
+              className="hover-lift smooth-transition"
             >
               <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -61,7 +64,7 @@ export function Navbar() {
             </Button>
             
             <Link href="/contact">
-              <Button data-testid="cta-get-quote">
+              <Button data-testid="cta-get-quote" className="hover-lift smooth-transition">
                 Get Quote
               </Button>
             </Link>
