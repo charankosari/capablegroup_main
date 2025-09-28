@@ -3,10 +3,10 @@ import { ServiceCard } from "@/components/service-card";
 import { CaseStudyCard } from "@/components/case-study-card";
 import { PricingTable } from "@/components/pricing-table";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
-import { Smartphone, Globe, Bot, ServerCog, Star, User } from "lucide-react";
+import { Smartphone, Globe, Bot, ServerCog } from "lucide-react";
 import { CompaniesMarquee } from "@/components/companies-marquee";
+import { MarqueeDemo } from "@/components/marquee";
 export default function Home() {
   const services = [
     {
@@ -89,30 +89,6 @@ export default function Home() {
       tags: ["Mobile", "React Native"],
       metric1: "4.8★ Rating",
       metric2: "8 weeks",
-    },
-  ];
-
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "CEO, TechFlow",
-      content:
-        "Capable Groups delivered our e-commerce platform ahead of schedule. The attention to detail and code quality exceeded our expectations.",
-      rating: 5,
-    },
-    {
-      name: "Michael Chen",
-      role: "CTO, DataSync",
-      content:
-        "The AI automation they built has saved us 20 hours per week. ROI was immediate and the solution scales perfectly.",
-      rating: 5,
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Founder, Innovate Co",
-      content:
-        "Professional, responsive, and technically excellent. They transformed our vision into a beautiful, functional reality.",
-      rating: 5,
     },
   ];
 
@@ -210,33 +186,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} data-testid={`testimonial-${index}`}>
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                      <User className="text-primary h-6 w-6" />
-                    </div>
-                    <div>
-                      <div className="font-semibold">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {testimonial.role}
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground mb-4">
-                    "{testimonial.content}"
-                  </p>
-                  <div className="flex text-primary">
-                    {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-current" />
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <MarqueeDemo />
         </div>
       </section>
     </div>

@@ -18,3 +18,4 @@ export const Shimmer = ({ className, children }: ShimmerProps) => {
     </div>
   );
 };
+

@@ -17,55 +17,57 @@ interface PricingTier {
 const pricingTiers: PricingTier[] = [
   {
     name: "Starter",
-    price: "$5,000",
+    price: "$2500",
     description: "Perfect for small projects",
     features: [
       "Landing Page",
-      "Responsive Design", 
+      "Responsive Design",
       "Basic SEO",
-      "30-day Support"
+      "30-day Support",
     ],
     buttonText: "Choose Starter",
-    buttonHref: "/contact"
+    buttonHref: "/contact",
   },
   {
     name: "Professional",
-    price: "$15,000",
+    price: "$5000",
     description: "For growing businesses",
     features: [
       "Full Website/App",
       "Custom Design",
-      "CMS Integration", 
+      "CMS Integration",
       "90-day Support",
-      "Performance Optimization"
+      "Performance Optimization",
     ],
     popular: true,
     buttonText: "Choose Professional",
-    buttonHref: "/contact"
+    buttonHref: "/contact",
   },
   {
     name: "Enterprise",
-    price: "$50,000+",
+    price: "$10,000+",
     description: "For complex solutions",
     features: [
       "Custom Development",
       "AI Integration",
       "Dedicated Team",
-      "1-year Support", 
-      "Priority Updates"
+      "1-year Support",
+      "Priority Updates",
     ],
     buttonText: "Contact Sales",
-    buttonHref: "/contact"
-  }
+    buttonHref: "/contact",
+  },
 ];
 
 export function PricingTable() {
   return (
     <div className="grid md:grid-cols-3 gap-8">
       {pricingTiers.map((tier, index) => (
-        <Card 
+        <Card
           key={tier.name}
-          className={`relative ${tier.popular ? 'border-2 border-primary' : 'border border-border'}`}
+          className={`relative ${
+            tier.popular ? "border-2 border-primary" : "border border-border"
+          }`}
           data-testid={`pricing-tier-${tier.name.toLowerCase()}`}
         >
           {tier.popular && (
@@ -75,13 +77,13 @@ export function PricingTable() {
               </Badge>
             </div>
           )}
-          
+
           <CardHeader className="text-center">
             <CardTitle className="text-xl font-heading">{tier.name}</CardTitle>
             <div className="text-3xl font-bold mb-1">{tier.price}</div>
             <p className="text-muted-foreground">{tier.description}</p>
           </CardHeader>
-          
+
           <CardContent>
             <ul className="space-y-3 mb-8">
               {tier.features.map((feature, idx) => (
@@ -91,9 +93,9 @@ export function PricingTable() {
                 </li>
               ))}
             </ul>
-            
+
             <Link href={tier.buttonHref}>
-              <Button 
+              <Button
                 variant={tier.popular ? "default" : "outline"}
                 className="w-full"
                 data-testid={`pricing-button-${tier.name.toLowerCase()}`}

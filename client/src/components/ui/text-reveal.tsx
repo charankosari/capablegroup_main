@@ -29,3 +29,4 @@ export const TextReveal = ({ text, className }: TextRevealProps) => {
     </div>
   );
 };
+

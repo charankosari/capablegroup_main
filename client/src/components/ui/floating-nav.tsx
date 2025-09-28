@@ -22,3 +22,4 @@ export const FloatingNav = ({ children, className }: FloatingNavProps) => {
     </motion.div>
   );
 };
+
