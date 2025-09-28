@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { TypewriterWords } from "@/components/typewriter-effect";
+import { MorphingText } from "@/components/morphing-text";
 
 export function HeroSection() {
   return (
@@ -9,23 +9,19 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="animate-slide-up">
             <h1 className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 animate-fade-in-delay-1">
-              We Build Exceptional{" "}
-              <span className="animate-hyper-text">
-                <TypewriterWords
-                  words={[
-                    "Digital Products",
-                    "AI Agents",
-                    "Web Apps",
-                    "Mobile Apps",
-                    "Automations",
-                    "Workplace Tools",
-                  ]}
-                  className="text-primary"
-                  typeSpeed={90}
-                  deleteSpeed={40}
-                  delaySpeed={2000}
-                />
-              </span>
+              We Build Exceptional <br />{" "}
+              <MorphingText
+                texts={[
+                  " Digital Products",
+                  "AI Agents",
+                  "Web Apps",
+                  "Mobile Apps",
+                  "Automations",
+                  "Workplace Tools",
+                ]}
+                className="text-primary"
+                duration={3000}
+              />
             </h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed animate-fade-in-delay-2">
               Apps, websites, AI agents, automations, and workplace tools that
