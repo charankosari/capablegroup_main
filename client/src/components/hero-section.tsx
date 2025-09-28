@@ -1,11 +1,25 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { MorphingText } from "@/components/morphing-text";
+import { SparklesCore } from "@/components/ui/sparkles";
 
 export function HeroSection() {
   return (
-    <section className="pt-24 pb-12 md:pt-32 md:pb-20 hero-gradient">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative pt-24 pb-12 md:pt-32 md:pb-20 hero-gradient overflow-hidden">
+      {/* 🔥 Sparkles Background */}
+      <div className="absolute inset-0 -z-10 h-full w-full">
+        <SparklesCore
+          id="tsparticlesfullpage"
+          background="transparent"
+          minSize={0.6}
+          maxSize={1.4}
+          particleDensity={100}
+          className="w-full h-full"
+          particleColor="#FFFFFF"
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="animate-slide-up">
             <h1 className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 animate-fade-in-delay-1">
@@ -19,7 +33,7 @@ export function HeroSection() {
                   "Automations",
                   "Workplace Tools",
                 ]}
-                className="text-primary"
+                className="text-primary relative"
                 duration={3000}
               />
             </h1>
@@ -51,7 +65,7 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="animate-scale-in">
+          <div className="animate-scale-in relative">
             <div className="relative">
               <img
                 src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"

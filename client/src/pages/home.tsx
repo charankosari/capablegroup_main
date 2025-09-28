@@ -19,6 +19,7 @@ export default function Home() {
         "Cross-platform Solutions",
         "App Store Optimization",
       ],
+      variant: "featured" as const,
     },
     {
       icon: Globe,
@@ -30,6 +31,7 @@ export default function Home() {
         "E-commerce Solutions",
         "Performance Optimization",
       ],
+      variant: "default" as const,
     },
     {
       icon: Bot,
@@ -41,6 +43,7 @@ export default function Home() {
         "Chatbots & Assistants",
         "Machine Learning",
       ],
+      variant: "default" as const,
     },
     {
       icon: ServerCog,
@@ -52,6 +55,7 @@ export default function Home() {
         "API Integrations",
         "Business Process Optimization",
       ],
+      variant: "compact" as const,
     },
   ];
 
@@ -140,7 +144,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
             {services.map((service, index) => (
               <ServiceCard key={service.title} {...service} index={index} />
             ))}

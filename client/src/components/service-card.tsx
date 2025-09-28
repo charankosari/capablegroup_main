@@ -1,92 +1,73 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import React from "react";
 
 interface ServiceCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
-  features: string[];
   index: number;
 }
 
-export function ServiceCard({ icon: Icon, title, description, features, index }: ServiceCardProps) {
+export function ServiceCard({
+  icon: Icon,
+  title,
+  description,
+  index,
+}: ServiceCardProps) {
+  // Animation variants for the card
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        delay: index * 0.1,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
-    <motion.div 
-      className="glass-card p-6 rounded-xl hover-lift smooth-transition"
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ 
-        duration: 0.8, 
-        delay: index * 0.15,
-        ease: [0.4, 0, 0.2, 1]
+    <motion.div
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+      whileHover={{
+        y: -4,
+        transition: { duration: 0.2, ease: "easeOut" },
       }}
-      whileHover={{ 
-        scale: 1.02,
-        transition: { duration: 0.3 }
-      }}
-      data-testid={`service-card-${title.toLowerCase().replace(/\s+/g, '-')}`}
+      className={cn(
+        "group relative w-full h-full rounded-xl",
+        "bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800",
+        "hover:shadow-lg hover:shadow-gray-200/50 dark:hover:shadow-gray-900/50",
+        "transition-all duration-300 ease-out"
+      )}
+      data-testid={`service-card-${title.toLowerCase().replace(/\s+/g, "-")}`}
     >
-      <motion.div 
-        className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ 
-          duration: 0.5, 
-          delay: index * 0.15 + 0.2,
-          ease: [0.4, 0, 0.2, 1]
-        }}
-      >
-        <Icon className="text-primary h-6 w-6" />
-      </motion.div>
-      <motion.h3 
-        className="font-heading font-semibold text-xl mb-3"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          duration: 0.6, 
-          delay: index * 0.15 + 0.3,
-          ease: [0.4, 0, 0.2, 1]
-        }}
-      >
-        {title}
-      </motion.h3>
-      <motion.p 
-        className="text-muted-foreground mb-4"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          duration: 0.6, 
-          delay: index * 0.15 + 0.4,
-          ease: [0.4, 0, 0.2, 1]
-        }}
-      >
-        {description}
-      </motion.p>
-      <motion.ul 
-        className="text-sm text-muted-foreground space-y-1"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ 
-          duration: 0.6, 
-          delay: index * 0.15 + 0.5,
-          ease: [0.4, 0, 0.2, 1]
-        }}
-      >
-        {features.map((feature, idx) => (
-          <motion.li 
-            key={idx}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ 
-              duration: 0.4, 
-              delay: index * 0.15 + 0.6 + idx * 0.1,
-              ease: [0.4, 0, 0.2, 1]
-            }}
-          >
-            • {feature}
-          </motion.li>
-        ))}
-      </motion.ul>
+      {/* Simple Card Content */}
+      <div className="p-6 h-full flex flex-col">
+        {/* Icon */}
+        <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors duration-300">
+          <Icon className="h-6 w-6 text-primary" />
+        </div>
+
+        {/* Title */}
+        <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary transition-colors duration-300">
+          {title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed flex-grow">
+          {description}
+        </p>
+
+        {/* Simple CTA */}
+      </div>
     </motion.div>
   );
 }
