@@ -23,3 +23,4 @@ export const FloatingNav = ({ children, className }: FloatingNavProps) => {
   );
 };
 
+

@@ -67,23 +67,23 @@ export default {
           },
         },
         fadeIn: {
-          from: {
+          from: { 
             opacity: "0",
-            transform: "translateY(10px)",
+            transform: "translateY(10px)"
           },
-          to: {
+          to: { 
             opacity: "1",
-            transform: "translateY(0)",
+            transform: "translateY(0)"
           },
         },
         slideUp: {
-          from: {
-            transform: "translateY(30px)",
-            opacity: "0",
+          from: { 
+            transform: "translateY(30px)", 
+            opacity: "0" 
           },
-          to: {
-            transform: "translateY(0)",
-            opacity: "1",
+          to: { 
+            transform: "translateY(0)", 
+            opacity: "1" 
           },
         },
         bounceGentle: {
@@ -91,13 +91,13 @@ export default {
           "50%": { transform: "translateY(-8px)" },
         },
         scaleIn: {
-          from: {
-            transform: "scale(0.95)",
-            opacity: "0",
+          from: { 
+            transform: "scale(0.95)", 
+            opacity: "0" 
           },
-          to: {
-            transform: "scale(1)",
-            opacity: "1",
+          to: { 
+            transform: "scale(1)", 
+            opacity: "1" 
           },
         },
         float: {
@@ -108,27 +108,16 @@ export default {
           "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(100%)" },
         },
-        marquee: {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(calc(-100% - var(--gap)))" },
-        },
-        "marquee-vertical": {
-          from: { transform: "translateY(0)" },
-          to: { transform: "translateY(calc(-100% - var(--gap)))" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
         "slide-up": "slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
-        "bounce-gentle":
-          "bounceGentle 3s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+        "bounce-gentle": "bounceGentle 3s cubic-bezier(0.4, 0, 0.2, 1) infinite",
         "scale-in": "scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
-        float: "float 6s ease-in-out infinite",
-        shimmer: "shimmer 2s linear infinite",
-        marquee: "marquee var(--duration) linear infinite",
-        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+        "float": "float 6s ease-in-out infinite",
+        "shimmer": "shimmer 2s linear infinite",
       },
     },
   },
