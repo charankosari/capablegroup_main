@@ -1,5 +1,15 @@
 import { Link } from "wouter";
-import { Code, Twitter, Linkedin, Github, Dribbble } from "lucide-react";
+import {
+  Code,
+  Twitter,
+  Linkedin,
+  Github,
+  Dribbble,
+  Facebook,
+  Mail,
+  Phone,
+  MapPin,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -39,129 +49,124 @@ export function Footer() {
   return (
     <>
       {/* Newsletter Section */}
-      <section className="py-16 border-t border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading font-bold text-2xl md:text-3xl mb-4">
+      <section className="py-12 border-t border-border">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-heading font-bold text-xl md:text-2xl mb-3">
             Stay Updated
           </h2>
-          <p className="text-muted-foreground mb-8">
-            Get the latest insights on development trends, project updates, and
-            industry news.
+          <p className="text-muted-foreground mb-6 text-sm">
+            Get the latest insights on technology trends and industry news.
           </p>
 
           <form
             onSubmit={handleNewsletterSubmit}
-            className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+            className="flex flex-col sm:flex-row gap-3 max-w-sm mx-auto"
           >
             <Input
               type="email"
-              placeholder="Your email address"
+              placeholder="Your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="flex-1"
+              className="flex-1 text-sm"
               data-testid="newsletter-email-input"
             />
             <Button
               type="submit"
               disabled={isSubmitting}
+              size="sm"
               data-testid="newsletter-submit"
             >
               {isSubmitting ? "Subscribing..." : "Subscribe"}
             </Button>
           </form>
 
-          <p className="text-xs text-muted-foreground mt-4">
-            No spam, unsubscribe at any time. We respect your privacy.
+          <p className="text-xs text-muted-foreground mt-3">
+            No spam, unsubscribe at any time.
           </p>
         </div>
       </section>
 
       {/* Main Footer */}
-      <footer className="bg-card border-t border-border py-16">
+      <footer className="bg-card border-t border-border py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
-            <div className="md:col-span-2">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            {/* Company Info & Contact */}
+            <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className=" rounded-lg flex items-center justify-center">
-                  <img src={Logo} alt="Capable Labs" className="h-10" />
-                </div>
+                <img src={Logo} alt="INFT Solutions" className="h-8" />
               </div>
-              <p className="text-muted-foreground mb-6 max-w-md">
-                We build exceptional digital products that drive results. From
-                concept to deployment, we deliver premium development solutions.
+              <p className="text-muted-foreground text-sm mb-4">
+                Premier provider of Application services, IT staffing and
+                emerging technology solutions.
               </p>
-              <div className="flex space-x-4">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  data-testid="social-twitter"
-                >
-                  <Twitter className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  data-testid="social-linkedin"
-                  onClick={() =>
-                    window.open(
-                      "https://www.linkedin.com/company/capable-groups",
-                      "_blank"
-                    )
-                  }
-                >
-                  <Linkedin className="h-4 w-4" />
-                </Button>
-                <Button variant="ghost" size="icon" data-testid="social-github">
-                  <Github className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  data-testid="social-dribbble"
-                >
-                  <Dribbble className="h-4 w-4" />
-                </Button>
+
+              {/* Compact Contact Info */}
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <div className="flex items-center">
+                  <MapPin className="h-3 w-3 mr-2 flex-shrink-0" />
+                  <span>Atlanta, GA 30350, USA</span>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="h-3 w-3 mr-2 flex-shrink-0" />
+                  <a
+                    href="mailto:info@inftsolutions.com"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    info@inftsolutions.com
+                  </a>
+                </div>
+                <div className="flex items-center">
+                  <Phone className="h-3 w-3 mr-2 flex-shrink-0" />
+                  <a
+                    href="tel:+16785617610"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    +1 678-561-7610
+                  </a>
+                </div>
               </div>
             </div>
 
+            {/* Services */}
             <div>
-              <h3 className="font-semibold mb-4">Services</h3>
-              <ul className="space-y-3 text-muted-foreground">
+              <h3 className="font-semibold mb-3 text-sm">Services</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/services">
                     <a className="hover:text-foreground transition-colors">
-                      Website Development
+                      Business Transformation
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/services">
                     <a className="hover:text-foreground transition-colors">
-                      Mobile Apps
+                      Digital Transformation
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/services">
                     <a className="hover:text-foreground transition-colors">
-                      AI Agents
+                      AI Solutions
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/services">
                     <a className="hover:text-foreground transition-colors">
-                      Automations
+                      IT Staffing
                     </a>
                   </Link>
                 </li>
               </ul>
             </div>
 
+            {/* Company & Social */}
             <div>
-              <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-3 text-muted-foreground">
+              <h3 className="font-semibold mb-3 text-sm">Company</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground mb-4">
                 <li>
                   <Link href="/about">
                     <a className="hover:text-foreground transition-colors">
@@ -170,16 +175,9 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/work">
+                  <Link href="/careers">
                     <a className="hover:text-foreground transition-colors">
-                      Portfolio
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog">
-                    <a className="hover:text-foreground transition-colors">
-                      Blog
+                      Careers
                     </a>
                   </Link>
                 </li>
@@ -191,12 +189,52 @@ export function Footer() {
                   </Link>
                 </li>
               </ul>
+
+              {/* Social Links */}
+              <div className="flex space-x-3">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  data-testid="social-facebook"
+                  onClick={() =>
+                    window.open(
+                      "https://www.facebook.com/inftsolutionsinc",
+                      "_blank"
+                    )
+                  }
+                >
+                  <Facebook className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  data-testid="social-twitter"
+                  onClick={() =>
+                    window.open("https://twitter.com/inftsolutions", "_blank")
+                  }
+                >
+                  <Twitter className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  data-testid="social-linkedin"
+                  onClick={() =>
+                    window.open(
+                      "https://www.linkedin.com/company/inft-solutions-inc/",
+                      "_blank"
+                    )
+                  }
+                >
+                  <Linkedin className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
 
           <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-muted-foreground text-sm">
-              © 2024 Capable Groups. All rights reserved.
+              © 2024 INFT Solutions Inc. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link href="/privacy">

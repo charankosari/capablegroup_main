@@ -18,7 +18,7 @@ export default function Services() {
       icon: Globe,
       title: "Business Transformation",
       description:
-        "At INFT Solutions, we believe in unlocking the power of transformation for our clients. We help businesses evolve and adapt to changing market conditions through strategic planning and implementation.",
+        "At INFT Solutions, we believe in unlocking the power of transformation for our clients.",
       features: [
         "Strategic Business Planning",
         "Process Optimization",
@@ -40,7 +40,7 @@ export default function Services() {
       icon: ServerCog,
       title: "Digital Transformation",
       description:
-        "At INFT Solutions, we are constantly pushing the boundaries of innovation and technology. We help organizations modernize their operations and embrace digital-first approaches.",
+        "At INFT Solutions, we are constantly pushing the boundaries of innovation and technology.",
       features: [
         "Legacy System Modernization",
         "Cloud Migration",
@@ -62,7 +62,7 @@ export default function Services() {
       icon: Bot,
       title: "Artificial Intelligence",
       description:
-        "We are living in an era of unprecedented technological transformation and AI is driving this revolution. Our AI solutions help businesses automate processes and gain intelligent insights.",
+        "We are living in an era of unprecedented technological transformation and AI is driving this revolution.",
       features: [
         "Machine Learning Models",
         "Natural Language Processing",
@@ -81,35 +81,35 @@ export default function Services() {
       ],
       pricing: "Starting at $3000",
     },
-    {
-      icon: Globe,
-      title: "Technology Solutions",
-      description:
-        "Are you looking for a partner who can help you advance your enterprise technology? We provide comprehensive technology solutions tailored to your business needs.",
-      features: [
-        "Enterprise Software Development",
-        "System Integration",
-        "Infrastructure Management",
-        "Security Solutions",
-        "Performance Optimization",
-        "Technical Support",
-      ],
-      technologies: [
-        "Java",
-        "Python",
-        "Node.js",
-        "AWS",
-        "Azure",
-        "Docker",
-        "Kubernetes",
-      ],
-      pricing: "Starting at $2000",
-    },
+    // {
+    //   icon: Globe,
+    //   title: "Technology",
+    //   description:
+    //     "Are you looking for a partner who can help you advance your enterprise...",
+    //   features: [
+    //     "Enterprise Software Development",
+    //     "System Integration",
+    //     "Infrastructure Management",
+    //     "Security Solutions",
+    //     "Performance Optimization",
+    //     "Technical Support",
+    //   ],
+    //   technologies: [
+    //     "Java",
+    //     "Python",
+    //     "Node.js",
+    //     "AWS",
+    //     "Azure",
+    //     "Docker",
+    //     "Kubernetes",
+    //   ],
+    //   pricing: "Starting at $2000",
+    // },
     {
       icon: ServerCog,
-      title: "Solutions Development",
+      title: "Solutions",
       description:
-        "We are a leading digital solutions provider with a team of highly experienced subject matter experts. We deliver custom solutions that address your specific business challenges.",
+        "We are a leading digital solutions provider with a team of highly experienced subject...",
       features: [
         "Custom Application Development",
         "Database Design & Management",
@@ -133,7 +133,7 @@ export default function Services() {
       icon: Globe,
       title: "IT Consulting",
       description:
-        "Technology has become an integral part of business success in the modern world. Our IT consulting services help you make informed technology decisions and optimize your IT infrastructure.",
+        "Technology has become an integral part of business success in the modern world...",
       features: [
         "Technology Assessment",
         "IT Strategy Development",
@@ -155,7 +155,7 @@ export default function Services() {
       icon: ServerCog,
       title: "IT Staffing",
       description:
-        "Develop a global, consistent, and scalable hiring process with our IT staffing solutions. We provide access to top-tier technology talent to support your projects and initiatives.",
+        "Develop a global, consistent, and scalable hiring process...",
       features: [
         "Talent Acquisition",
         "Technical Recruitment",

@@ -15,6 +15,7 @@ export function Navbar() {
     { name: "Work", href: "/work" },
     { name: "Fees", href: "/fees" },
     { name: "About", href: "/about" },
+    { name: "Careers", href: "/careers" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -28,21 +29,20 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" data-testid="logo-link">
             <div className="flex items-center space-x-2 hover-lift smooth-transition">
-              
               <img src={Logo} alt="Capable Labs" className=" h-10" />
             </div>
           </Link>
-          
+
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item, index) => (
               <Link key={item.name} href={item.href}>
-                <span 
+                <span
                   className={`text-muted-foreground hover:text-foreground smooth-transition cursor-pointer relative group ${
-                    location === item.href ? 'text-foreground font-medium' : ''
+                    location === item.href ? "text-foreground font-medium" : ""
                   }`}
                   data-testid={`nav-link-${item.name.toLowerCase()}`}
                   style={{
-                    animationDelay: `${index * 0.1}s`
+                    animationDelay: `${index * 0.1}s`,
                   }}
                 >
                   {item.name}
@@ -50,7 +50,7 @@ export function Navbar() {
                 </span>
               </Link>
             ))}
-            
+
             <Button
               variant="ghost"
               size="icon"
@@ -62,17 +62,25 @@ export function Navbar() {
               <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               <span className="sr-only">Toggle theme</span>
             </Button>
-            
+
             <Link href="/contact">
-              <Button data-testid="cta-get-quote" className="hover-lift smooth-transition">
+              <Button
+                data-testid="cta-get-quote"
+                className="hover-lift smooth-transition"
+              >
                 Get Quote
               </Button>
             </Link>
           </div>
-          
+
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" data-testid="mobile-menu-toggle">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                data-testid="mobile-menu-toggle"
+              >
                 <Menu className="h-4 w-4" />
               </Button>
             </SheetTrigger>
@@ -80,7 +88,7 @@ export function Navbar() {
               <div className="flex flex-col space-y-4 mt-8">
                 {navigation.map((item) => (
                   <Link key={item.name} href={item.href}>
-                    <span 
+                    <span
                       className="text-muted-foreground hover:text-foreground transition-colors block py-2 cursor-pointer"
                       onClick={() => setIsOpen(false)}
                       data-testid={`mobile-nav-link-${item.name.toLowerCase()}`}

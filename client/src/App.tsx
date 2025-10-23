@@ -14,16 +14,17 @@ import Work from "@/pages/work";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Blog from "@/pages/blog";
+import Careers from "@/pages/careers";
 import Privacy from "@/pages/privacy";
 import Terms from "@/pages/terms";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   const [location] = useLocation();
-  
+
   // Scroll to top when route changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location]);
 
   return (
@@ -36,6 +37,7 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/blog" component={Blog} />
+        <Route path="/careers" component={Careers} />
         <Route path="/privacy" component={Privacy} />
         <Route path="/terms" component={Terms} />
         <Route component={NotFound} />
