@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import {
   Users,
   Target,
@@ -79,6 +80,35 @@ export default function About() {
 
   return (
     <div className="pt-16">
+      <Helmet>
+        <title>About Us - Capable Groups | IT Solutions & Services</title>
+        <meta
+          name="description"
+          content="Learn about Capable Groups, an emerging Indian IT company founded in 2010. We deliver comprehensive IT solutions including web development, software development, ERP services, and recruitment process outsourcing."
+        />
+        <meta
+          name="keywords"
+          content="about capable groups, IT company India, software development company, web development services, ERP services, recruitment outsourcing"
+        />
+        <meta
+          property="og:title"
+          content="About Us - Capable Groups | IT Solutions & Services"
+        />
+        <meta
+          property="og:description"
+          content="Learn about Capable Groups, an emerging Indian IT company delivering comprehensive IT solutions and services."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="About Us - Capable Groups | IT Solutions & Services"
+        />
+        <meta
+          name="twitter:description"
+          content="Learn about Capable Groups, an emerging Indian IT company delivering comprehensive IT solutions and services."
+        />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-20 hero-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

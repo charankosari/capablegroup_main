@@ -7,6 +7,7 @@ import { Link } from "wouter";
 import { Smartphone, Globe, Bot, ServerCog } from "lucide-react";
 import { CompaniesMarquee } from "@/components/companies-marquee";
 import { MarqueeDemo } from "@/components/marquee";
+import { Helmet } from "react-helmet";
 export default function Home() {
   const services = [
     {
@@ -103,6 +104,35 @@ export default function Home() {
 
   return (
     <div>
+      <Helmet>
+        <title>Capable Groups - Premier IT Solutions & Services</title>
+        <meta
+          name="description"
+          content="Capable Groups is an emerging Indian Information Technology company delivering comprehensive IT solutions including web development, software development, ERP services, and recruitment process outsourcing."
+        />
+        <meta
+          name="keywords"
+          content="IT services, web development, software development, ERP services, recruitment, Hyderabad, India"
+        />
+        <meta
+          property="og:title"
+          content="Capable Groups - Premier IT Solutions & Services"
+        />
+        <meta
+          property="og:description"
+          content="Premier provider of Application services, IT staffing and emerging technology solutions."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Capable Groups - Premier IT Solutions & Services"
+        />
+        <meta
+          name="twitter:description"
+          content="Premier provider of Application services, IT staffing and emerging technology solutions."
+        />
+      </Helmet>
       <HeroSection />
 
       <CompaniesMarquee />

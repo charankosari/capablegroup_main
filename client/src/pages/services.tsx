@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "wouter";
+import { Helmet } from "react-helmet";
 import {
   Smartphone,
   Globe,
@@ -204,6 +205,35 @@ export default function Services() {
 
   return (
     <div className="pt-16">
+      <Helmet>
+        <title>Our Services - Capable Groups | IT Solutions & Services</title>
+        <meta
+          name="description"
+          content="Capable Groups offers comprehensive IT services including Business Transformation, Digital Transformation, AI Solutions, and IT Staffing. Get customized solutions for your business needs."
+        />
+        <meta
+          name="keywords"
+          content="IT services, business transformation, digital transformation, AI solutions, IT staffing, software development, web development, ERP services"
+        />
+        <meta
+          property="og:title"
+          content="Our Services - Capable Groups | IT Solutions & Services"
+        />
+        <meta
+          property="og:description"
+          content="Comprehensive IT services including Business Transformation, Digital Transformation, AI Solutions, and IT Staffing."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Our Services - Capable Groups | IT Solutions & Services"
+        />
+        <meta
+          name="twitter:description"
+          content="Comprehensive IT services including Business Transformation, Digital Transformation, AI Solutions, and IT Staffing."
+        />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-20 hero-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
+import { Helmet } from "react-helmet";
 import {
   Users,
   Briefcase,
@@ -176,6 +177,35 @@ export default function Careers() {
 
   return (
     <div className="pt-16">
+      <Helmet>
+        <title>Careers - Join Capable Groups | IT Jobs & Opportunities</title>
+        <meta
+          name="description"
+          content="Join Capable Groups and be part of our growing IT team. Explore career opportunities in software development, AI solutions, business transformation, and IT staffing."
+        />
+        <meta
+          name="keywords"
+          content="careers at capable groups, IT jobs Hyderabad, software developer jobs, AI engineer jobs, business analyst jobs, IT recruitment jobs"
+        />
+        <meta
+          property="og:title"
+          content="Careers - Join Capable Groups | IT Jobs & Opportunities"
+        />
+        <meta
+          property="og:description"
+          content="Join Capable Groups and be part of our growing IT team. Explore career opportunities in software development, AI solutions, and business transformation."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Careers - Join Capable Groups | IT Jobs & Opportunities"
+        />
+        <meta
+          name="twitter:description"
+          content="Join Capable Groups and be part of our growing IT team. Explore career opportunities in software development, AI solutions, and business transformation."
+        />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-20 hero-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

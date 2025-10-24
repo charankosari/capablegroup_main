@@ -103,17 +103,23 @@ export function Footer() {
 
               {/* Compact Contact Info */}
               <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-center">
-                  <MapPin className="h-3 w-3 mr-2 flex-shrink-0" />
-                  <span>Atlanta, GA 30350, USA</span>
+                <div className="flex items-start">
+                  <MapPin className="h-3 w-3 mr-2 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span>
+                      5th Floor, P & S Kickstart, Shanta Sriram Building PSR
+                      Towers, Beside DLF Building, Gachibowli Hyderabad,
+                      Telangana 500032
+                    </span>
+                  </div>
                 </div>
                 <div className="flex items-center">
                   <Mail className="h-3 w-3 mr-2 flex-shrink-0" />
                   <a
-                    href="mailto:info@inftsolutions.com"
+                    href="mailto:info@capablegroups.com"
                     className="hover:text-foreground transition-colors"
                   >
-                    info@inftsolutions.com
+                    Info@capablegroups.com
                   </a>
                 </div>
                 <div className="flex items-center">
@@ -122,7 +128,7 @@ export function Footer() {
                     href="tel:+16785617610"
                     className="hover:text-foreground transition-colors"
                   >
-                    +1 678-561-7610
+                    9493971983
                   </a>
                 </div>
               </div>
@@ -192,27 +198,10 @@ export function Footer() {
 
               {/* Social Links */}
               <div className="flex space-x-3">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  data-testid="social-facebook"
-                  onClick={() =>
-                    window.open(
-                      "https://www.facebook.com/inftsolutionsinc",
-                      "_blank"
-                    )
-                  }
-                >
+                <Button variant="ghost" size="sm" data-testid="social-facebook">
                   <Facebook className="h-4 w-4" />
                 </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  data-testid="social-twitter"
-                  onClick={() =>
-                    window.open("https://twitter.com/inftsolutions", "_blank")
-                  }
-                >
+                <Button variant="ghost" size="sm" data-testid="social-twitter">
                   <Twitter className="h-4 w-4" />
                 </Button>
                 <Button
@@ -221,7 +210,7 @@ export function Footer() {
                   data-testid="social-linkedin"
                   onClick={() =>
                     window.open(
-                      "https://www.linkedin.com/company/inft-solutions-inc/",
+                      "https://www.linkedin.com/company/capable-groups/",
                       "_blank"
                     )
                   }
@@ -234,7 +223,7 @@ export function Footer() {
 
           <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-muted-foreground text-sm">
-              © 2024 INFT Solutions Inc. All rights reserved.
+              © 2011 Capable Groups All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link href="/privacy">

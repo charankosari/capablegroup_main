@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import { Helmet } from "react-helmet";
 
 // --- Data for Work Items ---
 interface WorkItem {
@@ -240,6 +241,35 @@ export default function Work() {
 
   return (
     <div className="pt-16">
+      <Helmet>
+        <title>Our Work - Capable Groups | Portfolio & Case Studies</title>
+        <meta
+          name="description"
+          content="Explore Capable Groups' portfolio of successful IT projects. View our case studies in business transformation, digital transformation, AI solutions, and software development."
+        />
+        <meta
+          name="keywords"
+          content="capable groups portfolio, IT projects, software development projects, business transformation projects, digital transformation case studies, AI solutions portfolio"
+        />
+        <meta
+          property="og:title"
+          content="Our Work - Capable Groups | Portfolio & Case Studies"
+        />
+        <meta
+          property="og:description"
+          content="Explore Capable Groups' portfolio of successful IT projects and case studies."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Our Work - Capable Groups | Portfolio & Case Studies"
+        />
+        <meta
+          name="twitter:description"
+          content="Explore Capable Groups' portfolio of successful IT projects and case studies."
+        />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-20 hero-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

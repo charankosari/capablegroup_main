@@ -1,6 +1,7 @@
 import { ContactForm } from "@/components/contact-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Helmet } from "react-helmet";
 import {
   Mail,
   Phone,
@@ -60,6 +61,35 @@ export default function Contact() {
 
   return (
     <div className="pt-16">
+      <Helmet>
+        <title>Contact Us - Capable Groups | Get in Touch</title>
+        <meta
+          name="description"
+          content="Contact Capable Groups for IT solutions and services. Reach out to us for business transformation, digital transformation, AI solutions, and IT staffing services."
+        />
+        <meta
+          name="keywords"
+          content="contact capable groups, IT services contact, software development contact, business transformation contact, Hyderabad IT company"
+        />
+        <meta
+          property="og:title"
+          content="Contact Us - Capable Groups | Get in Touch"
+        />
+        <meta
+          property="og:description"
+          content="Contact Capable Groups for IT solutions and services. Get in touch with our team for customized solutions."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Contact Us - Capable Groups | Get in Touch"
+        />
+        <meta
+          name="twitter:description"
+          content="Contact Capable Groups for IT solutions and services. Get in touch with our team for customized solutions."
+        />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-20 hero-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
